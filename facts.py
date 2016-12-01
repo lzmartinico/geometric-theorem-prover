@@ -1,5 +1,14 @@
 from theorem_prover import *
 
+def triangle(a,b,c):
+	a.x = 0
+	a.y = 0
+	b.x = add_variable()
+	b.y = 0
+	c.x = add_variable()
+	c.y = add_variable()
+	return None
+
 def right_triangle(a,b,c):
 	a.x = 0
 	a.y = 0
@@ -29,10 +38,6 @@ def perpendicular((a,b),(c,d)):
 	return (b.y-a.y)*(d.y-c.y) + (d.x-c.x)*(b.x-a.x)
 
 def collinear(a,n,b):
-	if b.y-a.y == 0:
-		return n.y-a.y
-	if n.y-a.y == 0:
-		return b.y-a.y
 	return (n.y-a.y)*(b.x-a.x)-(b.y-a.y)*(n.x-a.x)
 
 def equidistant((a,b),(c,d)):
@@ -49,7 +54,10 @@ def on_circle_radius((a,b),c):
 	return equidistant((a,b),(a,c))
 
 def acute_angles_equal((a,b,c),(d,e,f)):
-	return None
+	cos1 = (a.x-b.x)*(c.x-b.x) + (a.y-b.y)*(c.y-b.y)
+	cos2 = (d.x-e.x)*(f.x-e.x) + (d.y-e.y)*(f.y-e.y)
+	return cos1-cos2
 
 def bisects_angle((a,b,c), d):
+	'''Line bd bisects angle abc'''
 	return acute_angles_equal((a,b,d),(d,b,c))
