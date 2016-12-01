@@ -23,19 +23,10 @@ def parallelogram(a,b,c,d):
 	return (h1,h2)
 
 def parallel((a,b), (c,d)):
-	if b.y-a.y == 0:
-		return d.y-c.y
-	if d.y-a.y == 0:
-		return b.y-a.y
 	return (b.y-a.y)*(d.x-c.x)-(d.y-c.y)*(b.x-a.x)
-	# what if b.x-a.x == 0 or d.x-c.x == 0?
 
 def perpendicular((a,b),(c,d)):
-	if (b.y-a.y) == 0:
-		return d.x-c.x
-	if (d.x-c.x) == 0:
-		return b.y-a.y
-	return (b.y-a.y)*(d.y-c.y) - (d.x-c.x)*(b.x-a.x)
+	return (b.y-a.y)*(d.y-c.y) + (d.x-c.x)*(b.x-a.x)
 
 def collinear(a,n,b):
 	if b.y-a.y == 0:
@@ -53,11 +44,12 @@ def midpoint(a,n,b):
 	return (h1,h2)
 	return equidistant((a,n),(n,b)) 
 
-def on_circle_radius(a,b,c):
-	return None
+def on_circle_radius((a,b),c):
+	'''Point c is on circle with radius ab'''
+	return equidistant((a,b),(a,c))
 
 def acute_angles_equal((a,b,c),(d,e,f)):
 	return None
 
 def bisects_angle((a,b,c), d):
-	return None
+	return acute_angles_equal((a,b,d),(d,b,c))

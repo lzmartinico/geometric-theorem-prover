@@ -6,12 +6,8 @@ C = Point()
 D = Point()
 
 fact(parallelogram,A,B,C,D)
-#fact(parallel, (A,B), (C,D))
-#fact(parallel, (A,C), (B,D))
 
-N = Point()
-N.x = add_variable(False)
-N.y = add_variable(False)
+N = Point(arbitrary=False)
 fact(collinear,A,N,D)
 fact(collinear,B,N,C)
 print conclusion(midpoint,A,N,D)

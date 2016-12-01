@@ -8,6 +8,10 @@ class Point():
     ui = 0
     xi = 0
     TheoremRing = PolynomialRing(CC, names=[])
+    def __init__(self,arbitrary=True):
+        if not arbitrary:
+	    self.x = add_variable(arbitrary=False)
+	    self.y = add_variable(arbitrary=False)
 
 def add_variable(arbitrary=True):
     newvar = None
@@ -32,12 +36,13 @@ def fact(f, *args):
 	     statements.append(stat)
 
 def degenerate_conclusion(c, *args):
-    Point.TheoremRing = PolynomialRing(CC, names=x_variables+u_variables+['y'])
-    y = Point.TheoremRing.gens()[-1]
+    R = PolynomialRing(CC, names=x_variables+u_variables+['y'])
+    y = R.gens()[-1]
     if isinstance(c(*args),tuple):
-    	I = Ideal(statements + [1-c(*args)[0]*y, 1-c(*args)[1]*y]);	
+	conclusions = [1-g*y for g in c(*args)]
+	I = R.ideal(statements + conclusions);
     else:
-        I = Ideal(statements + [1-c(*args)*y])
+        I = R.ideal(statements + [1-c(*args)*y])
     if I.groebner_basis() == [1]:
         return True
     return False
@@ -50,10 +55,10 @@ def conclusion(c, *args):
         R = PolynomialRing(F, names=x_variables+['y'])
         y = R.gens()[-1]
         if isinstance(c(*args),tuple):
-            I = Ideal(statements + [1-c(*args)[0]*y, 1-c(*args)[1]*y]);	
+	    conclusions = [1-g*y for g in c(*args)]
+	    I = R.ideal(statements + conclusions, coerce=True)
         else:
 	    I = R.ideal(statements + [1-c(*args)*y], coerce=True)
-#        print I.groebner_basis()
-        if 1 in I:#I.groebner_basis() == [1]:
+        if I.groebner_basis() == [1]:
             return True
         return False
