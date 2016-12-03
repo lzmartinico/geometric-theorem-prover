@@ -36,14 +36,14 @@ def fact(f, *args):
 		     continue
 		 factored = 1
 	         for f in i.factor():
-                if f[0] not in i.parent().gens():
+                     if f[0] not in i.parent().gens():
 	                 factored *= f[0]
 	         statements.append(factored)
 	else:
 	     factored = 1
 	     for f in stat.factor():
-            if f[0] not in stat.parent().gens():
-                factored *= f[0]
+                 if f[0] not in stat.parent().gens():
+	             factored *= f[0]
 	     statements.append(factored)
 
 def degenerate_conclusion(c, *args):

@@ -61,3 +61,11 @@ def acute_angles_equal((a,b,c),(d,e,f)):
 def bisects_angle((a,b,c), d):
 	'''Line bd bisects angle abc'''
 	return acute_angles_equal((a,b,d),(d,b,c))
+
+def intercept(p,a,b):
+    '''Point p is the interception of line tuples a and b'''
+    return (collinear(a[0],p,a[1]), collinear(b[0],p,b[1]))
+
+def altitude(a,b,(c,d)):
+    '''Point a is the altitude from b on line cd'''
+    return perpendicular((a,b),(c,d))
